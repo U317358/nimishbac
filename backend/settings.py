@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,8 +43,10 @@ INSTALLED_APPS = [
     'corsheaders'
 ]
 
-MIDDLEWARE = [
+
+   MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # keep this just after security
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -51,9 +54,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
+
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -124,3 +126,5 @@ CORS_ALLOW_ALL_ORIGINS = True
 STATIC_URL = 'static/'
 
 ALLOWED_HOSTS = ["*"]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
